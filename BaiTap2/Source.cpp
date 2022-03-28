@@ -28,7 +28,7 @@ void createList(list& l)
 	l.head = l.tail = NULL;
 }
 
-node* getNode(sach *data)
+node* getNode(sach* data)
 {
 	node* p = new node;
 	if (p == NULL)
@@ -45,7 +45,7 @@ node* getNode(sach *data)
 	return p;
 }
 
-void chenCuoi(list& l, node *p)
+void chenCuoi(list& l, node* p)
 {
 	if (l.head == NULL)
 	{
@@ -77,7 +77,7 @@ void chenSau(list& l, node* q, node* p)
 		p->next = t;
 		q->next = p;
 		p->prev = q;
-		if(t != NULL)
+		if (t != NULL)
 			t->prev = p;
 		if (q == l.head)
 			l.tail = p;
@@ -99,14 +99,14 @@ void chenTruoc(list& l, node* q, node* p)
 	else chenCuoi(l, p);
 }
 
-sach *nhapSach()
+sach* nhapSach()
 {
 	sach* book = new sach;
 	cin.ignore();
 	cout << "Nhap ten sach: ";
-	gets_s(book->tenSach);
+	gets_s(book->tenSach, 50);
 	cout << "Nhap ten tac gia: ";
-	gets_s(book->tenTacGia);
+	gets_s(book->tenTacGia, 50);
 	cout << "Nhap nam xuat ban: ";
 	cin >> book->namXuatBan;
 	return book;
@@ -161,7 +161,7 @@ node* timKiem(list l, char sachCanTim[])
 	return p;
 }
 
-void giaiPhong(list &l) {
+void giaiPhong(list& l) {
 	node* p;
 	while (l.head != NULL)
 	{
@@ -180,24 +180,50 @@ int main()
 	cout << "Nhap sach muon tim kiem: ";
 	cin.ignore();
 	char sachCanTim[50];
-	gets_s(sachCanTim);
+	gets_s(sachCanTim, 50);
 
 	node* sachTimDuoc = timKiem(l, sachCanTim);
 
 	cout << endl;
-	
+
 	inThongTin(sachTimDuoc);
 
-	//fflush(stdin);
-	//cout << "Nhap sach muon sua: ";
-	//char tenSachMuonSua[50];
-	//gets_s(tenSachMuonSua);
+	fflush(stdin);
+	cout << "Nhap sach muon sua: ";
+	char tenSachMuonSua[50];
+	gets_s(tenSachMuonSua, 50);
 
-	//node* sachMuonSua = timKiem(l, tenSachMuonSua);
+	node* sachMuonSua = timKiem(l, tenSachMuonSua);
 
-	cout << "Nhap sach can chen phia sau: ";
+	int userInput = 0;
+	system("cls");
+	cout << "1. Sua ten sach \n2.Sua ten tac gia\n3.Sua nam xuat ban" << endl;
+	cout << "Chon tac vu" << endl;
+	cin >> userInput;
+	switch (userInput)
+	{
+	case 1:
+		cout << "Nhap ten sach moi: ";
+		cin.ignore();
+		gets_s(sachMuonSua->data->tenSach, 50);
+		break;
+	case 2:
+		cout << "Nhap ten tac gia moi: ";
+		cin.ignore();
+		gets_s(sachMuonSua->data->tenTacGia, 50);
+		break;
+	case 3:
+		cout << "Nhap nam xuat ban moi: ";
+		cin.ignore();
+		cin >> sachMuonSua->data->namXuatBan;
+		break;
+	}
+
+	inThongTin(sachMuonSua);
+
+	cout << "chen tai vi tri cua sach: ";
 	char sachTruoc[50];
-	gets_s(sachTruoc);
+	gets_s(sachTruoc, 50);
 
 	cout << "Nhap thong tin sach can chen: \n Nhan Enter" << endl;
 
